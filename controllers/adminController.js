@@ -1,7 +1,8 @@
 const Category = require("../models/Category");
+const Bank = require("../models/Bank");
 
 module.exports = {
-  // ? Category Function
+  // * Category FCRUD unction * //
   viewCategory: async (req, res) => {
     try {
       const category = await Category.find();
@@ -14,6 +15,8 @@ module.exports = {
         title: "Staycation | Category",
       });
     } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
       res.redirect("/admin/category");
     }
   },
@@ -62,17 +65,83 @@ module.exports = {
       res.redirect("/admin/category");
     }
   },
-  // ? End Category Function
+  // * End Category CRUD Function * //
 
+  // * Bank CRUD Function * //
+  viewBank: async (req, res) => {
+    try {
+      const bank = await Bank.find();
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus };
+      res.render("admin/bank/view_bank", {
+        bank,
+        alert,
+        title: "Staycation | Bank",
+      });
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/bank");
+    }
+  },
+
+  addBank: async (req, res) => {
+    try {
+      const { name, bankName, accountNumber } = req.body;
+      await Bank.create({
+        name,
+        bankName,
+        accountNumber,
+      });
+      req.flash("alertMessage", "Bank has been Added");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/bank");
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/bank");
+    }
+  },
+
+  editBank: async (req, res) => {
+    try {
+      const { id, name, bankName, accountNumber } = req.body;
+      const bank = await Bank.findOne({ _id: id });
+      bank.name = name;
+      bank.bankName = bankName;
+      bank.accountNumber = accountNumber;
+      await bank.save();
+      req.flash("alertMessage", "Bank has been Updated");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/bank");
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/bank");
+    }
+  },
+
+  deleteBank: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const bank = await Bank.findOne({ _id: id });
+      await bank.remove();
+      req.flash("alertMessage", "Bank has been Deleted");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/bank");
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/bank");
+    }
+  },
+  //* End Bank CRUD Function *//
+
+  //* Other CRUD Function *//
   viewDashboard: (req, res) => {
     res.render("admin/dashboard/view_dashboard", {
       title: "Staycation | Dashboard",
-    });
-  },
-
-  viewBank: (req, res) => {
-    res.render("admin/bank/view_bank", {
-      title: "Staycation | Bank",
     });
   },
 
