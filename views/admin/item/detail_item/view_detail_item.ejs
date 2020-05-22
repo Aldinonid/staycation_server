@@ -1,23 +1,22 @@
-<%- include('../../partials/header.ejs') %>
+<%- include('../../../partials/header.ejs') %>
 
 <!-- Page Wrapper -->
 <div id="wrapper">
-  <%- include('../../partials/sidebar.ejs') %>
+  <%- include('../../../partials/sidebar.ejs') %>
 
   <!-- Content Wrapper -->
   <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-      <%- include('../../partials/navbar.ejs') %>
+      <%- include('../../../partials/navbar.ejs') %>
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
-        <%- include('../../partials/alert.ejs') %>
+        <%- include('../../../partials/alert.ejs') %>
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">Item</h1>
         <!-- End Heading -->
 
-        <% if (action == 'view') { %>
         <!-- Nav Tab -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
@@ -25,10 +24,10 @@
               class="nav-link active"
               id="home-tab"
               data-toggle="tab"
-              href="#show-item"
+              href="#show-feature"
               role="tab"
               aria-selected="true"
-              >Item List</a
+              >Show Feature</a
             >
           </li>
           <li class="nav-item">
@@ -36,61 +35,23 @@
               class="nav-link"
               id="profile-tab"
               data-toggle="tab"
-              href="#add-item"
+              href="#show-activity"
               role="tab"
               aria-selected="false"
-              >Add Item</a
+              >Show Activity</a
             >
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-          <%- include('table_item.ejs') %> <%- include('add_item.ejs') %>
+          <%- include('show_feature.ejs') %> <%- include('show_activity.ejs') %>
         </div>
         <!-- End Nav Tab -->
-        <% } else if (action == 'show image') { %>
-        <!-- Nav Tab -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              id="home-tab"
-              data-toggle="tab"
-              href="#show-item"
-              role="tab"
-              aria-selected="true"
-              >Image List</a
-            >
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <%- include('show_image_item.ejs') %>
-        </div>
-        <!-- End Nav Tab -->
-        <% } else { %>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              id="home-tab"
-              data-toggle="tab"
-              href="#edit-item"
-              role="tab"
-              aria-selected="true"
-              >Edit Item</a
-            >
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <%- include('edit_item.ejs') %>
-        </div>
-        <!-- End Nav Tab -->
-        <% } %>
       </div>
       <!-- /.container-fluid -->
     </div>
     <!-- End of Main Content -->
 
-    <%- include('../../partials/footer.ejs') %>
+    <%- include('../../../partials/footer.ejs') %>
   </div>
   <!-- End of Content Wrapper -->
 </div>
@@ -136,8 +97,11 @@
   </div>
 </div>
 
-<%- include('../../partials/js.ejs') %>
+<%- include('../../../partials/js.ejs') %>
 
 <script>
+  $(document).ready(() => {
+    $("#dataTableActivity").DataTable();
+  });
   CKEDITOR.replace("about");
 </script>
