@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
-const categorySchema = new mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
   bookingStartDate: {
     type: Date,
     required: true,
@@ -10,16 +10,31 @@ const categorySchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  proofPayment: {
+  invoice: {
     type: String,
     required: true,
   },
-  bankFrom: {
-    type: String,
-    required: true,
+  itemId: {
+    _id: {
+      type: ObjectId,
+      ref: "Item",
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    duration: {
+      type: Number,
+      required: true,
+    },
   },
-  accountHolder: {
-    type: String,
+  total: {
+    type: Number,
     required: true,
   },
   memberId: {
@@ -30,21 +45,24 @@ const categorySchema = new mongoose.Schema({
     type: ObjectId,
     ref: "Bank",
   },
-  itemId: {
-    _id: {
-      type: ObjectId,
-      ref: "Item",
+  payments: {
+    proofPayment: {
+      type: String,
       required: true,
     },
-    price: {
-      type: Number,
+    bankFrom: {
+      type: String,
       required: true,
     },
-    night: {
-      type: Number,
+    accountHolder: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
       required: true,
     },
   },
 });
 
-module.exports = mongoose.model("Category", categorySchema);
+module.exports = mongoose.model("Booking", bookingSchema);

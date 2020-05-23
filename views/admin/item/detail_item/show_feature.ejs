@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-md-5">
           <form
-            action="/admin/item"
+            action="/admin/item/add/feature"
             method="POST"
             enctype="multipart/form-data"
           >
@@ -49,6 +49,8 @@
               />
             </div>
 
+            <input type="hidden" value="<%= itemId %>" name="itemId" />
+
             <button type="submit" class="btn btn-primary">Save</button>
           </form>
         </div>
@@ -69,7 +71,44 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                <% for( let i = 0; i < feature.length; i++ ) { %>
+                <tr>
+                  <td><%= i +1 %></td>
+                  <td><%= feature[i].name %></td>
+                  <td><%= feature[i].qty %></td>
+                  <td>
+                    <img
+                      src="http://localhost:3000/<%= feature[i].imageUrl %>"
+                      alt="Feature"
+                      style="height: 100px; width: 100px;"
+                    />
+                  </td>
+                  <td>
+                    <form
+                      action="/admin/item/<%= itemId %>/feature/<%= feature[i].id %>?_method=DELETE"
+                      method="POST"
+                    >
+                      <a
+                        href="javascript:void();"
+                        type="button"
+                        class="btn btn-warning btn-circle btn-sm button-update"
+                        data-id="<%= feature[i].id %>"
+                        data-name="<%= feature[i].name %>"
+                        data-qty="<%= feature[i].qty %>"
+                        ><i class="fas fa-edit"></i
+                      ></a>
+                      <button
+                        type="submit"
+                        class="btn btn-danger btn-circle btn-sm"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
             </table>
           </div>
         </div>
