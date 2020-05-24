@@ -13,6 +13,7 @@ const path = require("path");
 const bcrypt = require("bcryptjs");
 
 module.exports = {
+  //* SignIn Function *//
   viewSignIn: async (req, res) => {
     try {
       const alertMessage = req.flash("alertMessage");
@@ -65,16 +66,25 @@ module.exports = {
     req.session.destroy();
     res.redirect("/admin/signin");
   },
+  //* End SignIn Function *//
 
-  viewDashboard: (req, res) => {
+  //* Dashboard Function *//
+  viewDashboard: async (req, res) => {
+    const member = await Member.find();
+    const booking = await Booking.find();
+    const item = await Item.find();
     const user = req.session.user;
     res.render("admin/dashboard/view_dashboard", {
       title: "Staycation | Dashboard",
       user,
+      member,
+      booking,
+      item,
     });
   },
+  //* End Dashboard Function *//
 
-  // * Category CRUD Function * //
+  //* Category CRUD Function *//
   viewCategory: async (req, res) => {
     const user = req.session.user;
     try {
@@ -139,9 +149,9 @@ module.exports = {
       res.redirect("/admin/category");
     }
   },
-  // * End Category CRUD Function * //
+  //* End Category CRUD Function *//
 
-  // * Bank CRUD Function * //
+  //* Bank CRUD Function *//
   viewBank: async (req, res) => {
     const user = req.session.user;
     try {
