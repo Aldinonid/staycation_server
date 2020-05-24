@@ -4,19 +4,11 @@ username : admin,
 password : rahasia
 
 Before clone this repo, make sure that you already install:
-<<<<<<< HEAD
-
-- Nodejs & Npm (latest is better)
-- Mongodb (mongo compass also better to be installed)
-
-=======
 - Nodejs & Npm (latest is better)
 - Mongodb (mongo compass also better to be installed)
 
 
->>>>>>> fdc3ea236ca25af07f6aea8b231568a07d9e4b24
 all module that you need to install are:
-
 - bcryptjs
 - ejs
 - connect-flash
@@ -32,7 +24,6 @@ all module that you need to install are:
 
 To run this code you need to insert the data to DB, you need to run the seed.js (you can find in this repo).
 terminal need to be in the repo directory and run this command:
-<<<<<<< HEAD
 
 node seed.js
 
@@ -40,13 +31,6 @@ after that, you already can view the website with this command:
 
 npm run dev
 
-open localhost:3000
-
-=======
-node seed.js
-
-after that, you already can view the website with this command:
-npm run dev
 open localhost:3000 
->>>>>>> fdc3ea236ca25af07f6aea8b231568a07d9e4b24
+
 enjoy!!
