@@ -6,6 +6,7 @@ var logger = require("morgan");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
+const cors = require("cors");
 
 // Import mongoose
 const mongoose = require("mongoose");
@@ -18,6 +19,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 // Admin
 const adminRouter = require("./routes/admin");
+const apiRouter = require("./routes/api");
 
 var app = express();
 
@@ -35,6 +37,7 @@ app.use(
 );
 app.use(flash());
 app.use(logger("dev"));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -48,6 +51,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 // Admin
 app.use("/admin", adminRouter);
+app.use("/api/v1/member", apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

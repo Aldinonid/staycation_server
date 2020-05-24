@@ -4,11 +4,12 @@ username : admin,
 password : rahasia
 
 Before clone this repo, make sure that you already install:
+
 - Nodejs & Npm (latest is better)
 - Mongodb (mongo compass also better to be installed)
 
-
 all module that you need to install are:
+
 - bcryptjs
 - ejs
 - connect-flash
@@ -20,6 +21,7 @@ all module that you need to install are:
 - multer
 - morgan
 - startbootstrap-sb-admin-2
+- cors
 - nodemon
 
 To run this code you need to insert the data to DB, you need to run the seed.js (you can find in this repo).
@@ -31,6 +33,6 @@ after that, you already can view the website with this command:
 
 npm run dev
 
-open localhost:3000 
+open localhost:3000
 
 enjoy!!
