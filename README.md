@@ -1,7 +1,12 @@
 # bwamern_staycation
 
 username : admin,
+
 password : rahasia
+
+API fetch docs:
+
+https://documenter.getpostman.com/view/11227477/Szt8fAkx
 
 Before clone this repo, make sure that you already install:
 
