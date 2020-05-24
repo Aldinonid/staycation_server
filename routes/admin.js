@@ -44,5 +44,8 @@ router.delete("/item/:itemId/activity/:id", adminController.deleteActivity);
 
 //* Item End Point *//
 router.get("/booking", adminController.viewBooking);
+router.get("/booking/:id", adminController.showDetailBooking);
+router.put("/booking/:id/confirm", adminController.actionConfirm);
+router.put("/booking/:id/reject", adminController.actionReject);
 
 module.exports = router;

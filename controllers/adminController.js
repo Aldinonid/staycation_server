@@ -578,17 +578,67 @@ module.exports = {
   //* Booking Function *//
   viewBooking: async (req, res) => {
     try {
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus };
       const booking = await Booking.find()
         .populate("memberId")
         .populate("bankId");
-      console.log(booking);
       const user = req.session.user;
       res.render("admin/booking/view_booking", {
         title: "Staycation | Booking",
         user,
         booking,
+        alert,
       });
-    } catch (error) {}
+    } catch (error) {
+      res.redirect("/admin/booking");
+    }
+  },
+
+  showDetailBooking: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const booking = await Booking.findOne({ _id: id })
+        .populate("memberId")
+        .populate("bankId");
+      const user = req.session.user;
+      res.render("admin/booking/show_detail_booking", {
+        title: "Staycation | Detail Booking",
+        user,
+        booking,
+      });
+    } catch (error) {
+      res.redirect("admin/booking");
+    }
+  },
+
+  actionConfirm: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const booking = await Booking.findOne({ _id: id });
+      booking.payments.status = "Confirmed";
+      await booking.save();
+      req.flash("alertMessage", "Payment has been Confirmed");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/booking");
+    } catch (error) {
+      res.redirect(`/admin/booking/${id}`);
+    }
+  },
+
+  actionReject: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const booking = await Booking.findOne({ _id: id });
+      booking.payments.status = "Reject";
+      await booking.save();
+      req.flash("alertMessage", "Payment has been Rejected");
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/booking");
+    } catch (error) {
+      res.redirect(`/admin/booking/${id}`);
+    }
   },
   //* End Booking Function *//
 };
