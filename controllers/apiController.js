@@ -71,4 +71,39 @@ module.exports = {
       res.status(500).json({ message: "Internal server error" });
     }
   },
+
+  detailPage: async (req, res) => {
+    try {
+      const { id } = req.params;
+      //? API Item
+      const item = await Item.findOne({ _id: id })
+        .populate({ path: "featureId", select: "_id name qty imageUrl" })
+        .populate({ path: "activityId", select: "_id name type imageUrl" })
+        .populate({ path: "imageId", select: "_id imageUrl" });
+
+      //? API for Testimonial
+      const testimonial = {
+        _id: "asd1293uasdads1",
+        imageUrl: "/images/testimonial1.jpg",
+        name: "Happy Family",
+        rate: 4.25,
+        content:
+          "What a great trip with my family and I should try again next time soon ...",
+        familyName: "Angga",
+        familyOccupation: "UI Designer",
+      };
+
+      //? API for Bank
+      const bank = await Bank.find();
+
+      //? Display API JSON
+      res.status(200).json({
+        ...item._doc,
+        bank,
+        testimonial,
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
 };
