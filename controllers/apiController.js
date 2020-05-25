@@ -22,7 +22,7 @@ module.exports = {
       //? API for Categories
       const category = await Category.find().populate({
         path: "itemId",
-        select: "_id title country city sumBooking isPopular",
+        select: "_id title country city isPopular",
         perDocumentLimit: 4,
         options: { sort: { sumBooking: -1 } },
         populate: {
@@ -59,7 +59,7 @@ module.exports = {
 
       //? Display API JSON
       res.status(200).json({
-        Hero: {
+        hero: {
           travelers: traveler.length,
           treasures: treasure.length,
           cities: city.length,

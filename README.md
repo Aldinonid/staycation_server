@@ -41,3 +41,9 @@ npm run dev
 open localhost:3000
 
 enjoy!!
+
+To check the API testing, install:
+
+- mocha
+- chai
+- chai-http
