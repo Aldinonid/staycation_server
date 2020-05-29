@@ -13,37 +13,23 @@ Before clone this repo, make sure that you already install:
 - Nodejs & Npm (latest is better)
 - Mongodb (mongo compass also better to be installed)
 
-all module that you need to install are:
+Before run app, make sure that you already install all mode with command:
 
-- bcryptjs
-- ejs
-- connect-flash
-- express
-- express-session
-- fs-extra
-- method-override
-- mongoose-seed
-- multer
-- morgan
-- startbootstrap-sb-admin-2
-- cors
-- nodemon
+`npm i`
 
 To run this code you need to insert the data to DB, you need to run the seed.js (you can find in this repo).
 terminal need to be in the repo directory and run this command:
 
-node seed.js
+`node seed.js`
 
 after that, you already can view the website with this command:
 
-npm run dev
+`npm run dev`
+
+Test API configuration by command:
+
+`npm run test`
 
 open localhost:3000
 
 enjoy!!
-
-To check the API testing, install:
-
-- mocha
-- chai
-- chai-http
