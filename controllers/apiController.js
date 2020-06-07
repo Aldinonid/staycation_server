@@ -130,7 +130,6 @@ module.exports = {
 
     //? Logic when user not fill in mandatory field
     if (
-      itemId === undefined ||
       duration === undefined ||
       bookingStartDate === undefined ||
       bookingEndDate === undefined ||
@@ -148,7 +147,7 @@ module.exports = {
     const item = await Item.findOne({ _id: itemId });
 
     //? Logic if item isn't found
-    if (!item) {
+    if (itemId === undefined) {
       res.status(404).json({ message: "Item not Found" });
     }
 
